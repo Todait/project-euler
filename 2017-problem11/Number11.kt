@@ -25,7 +25,7 @@ val array: Array<IntArray> = arrayOf(row1, row2, row3, row4, row5, row6, row7, r
 
 
 fun getAnswer(): Int {
-    return listOf(getHorizontalMaxValue(), getVerticalMaxValue(), getLeftToRightDiagonalMaxValue(), getRightDiagonalMaxValue()).max() ?: 0
+    return listOf(getHorizontalMaxValue(), getVerticalMaxValue(), getRightToLeftDiagonalMaxValue(), getLeftToRightDiagonalMaxValue()).max() ?: 0
 }
 
 
@@ -55,7 +55,7 @@ fun getVerticalMaxValue(): Int {
     return maxValue
 }
 
-fun getLeftToRightDiagonalMaxValue(): Int {
+fun getRightToLeftDiagonalMaxValue(): Int {
     var maxValue = 0
     for (i in 0..16) {
         for (j in 3..19) {
@@ -67,7 +67,7 @@ fun getLeftToRightDiagonalMaxValue(): Int {
     return maxValue
 }
 
-fun getRightDiagonalMaxValue(): Int {
+fun getLeftToRightDiagonalMaxValue(): Int {
 
     var maxValue = 0
     for (i in 0..16) {
@@ -79,6 +79,3 @@ fun getRightDiagonalMaxValue(): Int {
     }
     return maxValue
 }
-
-
-
