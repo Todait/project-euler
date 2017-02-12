@@ -1,7 +1,116 @@
 package main
 
-import "testing"
+import (
+	"strconv"
 
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+
+	"testing"
+)
+
+// with ginkgo BDD Framework
+func TestProb017(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Prob017 Suite")
+}
+
+var _ = Describe("Main", func() {
+	Describe("#result", func() {
+		Context("When answer is given", func() {
+			It("is expected to equal OK", func() {
+				Expect(result()).To(Equal(21124))
+			})
+		})
+	})
+
+	Describe("type number", func() {
+		type testpair struct {
+			value  number
+			expect string
+		}
+
+		SpecTestPair := func(tests []testpair, m func(f number) string) {
+			for i := 0; i < len(tests); i++ {
+				pair := tests[i]
+				Specify("", func() {
+					By(strconv.Itoa(int(pair.value)) + " is given")
+					Expect(m(pair.value)).To(Equal(pair.expect))
+				})
+			}
+		}
+
+		Describe("#extractTen", func() {
+			var tests = []testpair{
+				{1, "one"},
+				{10, "ten"},
+				{11, "eleven"},
+				{17, "seventeen"},
+				{19, "nineteen"},
+				{20, "twenty"},
+				{24, "twenty-four"},
+				{99, "ninety-nine"},
+				{117, "seventeen"},
+				{124, "twenty-four"},
+				{199, "ninety-nine"},
+			}
+			SpecTestPair(tests, number.extractTen)
+		})
+
+		Describe("#extractHundred", func() {
+			var tests = []testpair{
+				{200, "two hundred"},
+				{117, "one hundred"},
+				{124, "one hundred"},
+				{199, "one hundred"},
+				{429, "four hundred"},
+				{910, "nine hundred"},
+			}
+			SpecTestPair(tests, number.extractHundred)
+		})
+
+		// NOTE: 클로저로 인한 후 케이스 실패
+		// SpecTestPair := func(tests []testpair, m func(f number) string) {
+		// 	for _, pair := range tests {
+		// 		Specify("", func() {
+		// 			By(strconv.Itoa(int(pair.value)) + " is given")
+		// 			Expect(m(pair.value)).To(Equal(pair.expect))
+		// 		})
+		// 	}
+		// }
+		//
+		// Describe("#extractTen", func() {
+		// 	var tests = []testpair{
+		// 		{1, "one"},
+		// 		{10, "ten"},
+		// 		{11, "eleven"},
+		// 		{17, "seventeen"},
+		// 		{19, "nineteen"},
+		// 		{20, "twenty"},
+		// 		{24, "twenty-four"},
+		// 		{99, "ninety-nine"},
+		// 		{117, "seventeen"},
+		// 		{124, "twenty-four"},
+		// 		{199, "ninety-nine1"},
+		// 	}
+		// 	SpecTestPair(tests, number.extractTen)
+		// })
+		//
+		// Describe("#extractHundred", func() {
+		// 	var tests = []testpair{
+		// 		{200, "two hundred"},
+		// 		{117, "one hundred"},
+		// 		{124, "one hundred"},
+		// 		{199, "one hundred"},
+		// 		{429, "four hundred"},
+		// 		{910, "nine hundred"},
+		// 	}
+		// 	SpecTestPair(tests, number.extractHundred)
+		// })
+	})
+})
+
+// with testing package
 func TestResult(t *testing.T) {
 	answer := 21124
 	v := result()
