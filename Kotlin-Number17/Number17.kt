@@ -1,40 +1,34 @@
 package lee.eulerproject.problem
 
-val oneToTenStringLengths = intArrayOf(3, 3, 5, 4, 4, 3, 5, 5, 4, 3)
-val elevenToNineteenStringLengths = intArrayOf(6, 6, 8, 8, 7, 7, 9, 8, 8)
-val twentyToNinetyStringLengths = intArrayOf(6, 6, 5, 5, 5, 7, 6, 6)
-val hundredStringLength = 7
 val andStringLength = 3
-val thousandStringLength = 8
+
+val numberStringLengthMap = mapOf(1 to "one".length, 2 to "two".length, 3 to "three".length, 4 to "four".length, 5 to "five".length, 6 to "six".length,
+        7 to "seven".length, 8 to "eight".length, 9 to "nine".length, 10 to "ten".length, 11 to "eleven".length, 12 to "twelve".length, 13 to "thirteen".length,
+        14 to "fourteen".length, 15 to "fifteen".length, 16 to "sixteen".length, 17 to "seventeen".length, 18 to "eighteen".length, 19 to "nineteen".length,
+        20 to "twenty".length, 30 to "thirty".length, 40 to "forty".length, 50 to "fifty".length, 60 to "sixty".length, 70 to "seventy".length, 80 to "eighty".length,
+        90 to "ninety".length, 100 to "hundred".length, 1000 to "thousand".length)
+
 
 fun getNumber17Answer(limitValue: Int): Int =
         generateSequence(1) { it + 1 }
                 .takeWhile { it <= limitValue }
-                .map {
-                    if (it < 11) return@map oneToTenStringLengths[it - 1]
-                    else if (it < 20) return@map elevenToNineteenStringLengths[it - 11]
-                    else if (it < 100) {
-                        if (it % 10 == 0)
-                            return@map twentyToNinetyStringLengths[(it / 10) - 2]
-                        else
-                            return@map twentyToNinetyStringLengths[(it / 10) - 2] + oneToTenStringLengths[(it % 10) - 1]
-                    } else if (it < 1000) {
-                        var numberStringLength = oneToTenStringLengths[it / 100] + hundredStringLength
-                        val number = it % 100
-                        if (number != 0) {
-                            numberStringLength += andStringLength
-                            if (number < 11) numberStringLength += oneToTenStringLengths[number - 1]
-                            else if (number < 20) numberStringLength += elevenToNineteenStringLengths[number - 11]
-                            else if (number < 100) {
-                                if (number % 10 == 0)
-                                    numberStringLength += twentyToNinetyStringLengths[(number / 10) - 2]
-                                else
-                                    numberStringLength += twentyToNinetyStringLengths[(number / 10) - 2] + oneToTenStringLengths[(number % 10) - 1]
-                            }
-                        }
-                        return@map numberStringLength
-                    } else //if (it == 1000)
-                        return@map oneToTenStringLengths[0] + thousandStringLength
-                }.sum()
+                .map(::getNumberLength)
+                .sum()
 
 
+fun getNumberLength(it: Int): Int {
+    if (it < 1) return 0
+    if (it < 20) return numberStringLengthMap[it]!!
+    if (it < 100) return numberStringLengthMap[it - (it % 10)]!! + (numberStringLengthMap[(it % 10)] ?: 0)
+    if (it < 1000) {
+        val doubleDigit = it % 100
+        val hundredStringLength = numberStringLengthMap[it / 100]!! + numberStringLengthMap[100]!!
+        if (doubleDigit == 0)
+            return hundredStringLength
+        else if (doubleDigit < 20)
+            return hundredStringLength + andStringLength + numberStringLengthMap[doubleDigit]!!
+        else
+            return hundredStringLength + andStringLength + numberStringLengthMap[doubleDigit - (doubleDigit % 10)]!! + (numberStringLengthMap[(doubleDigit % 10)] ?: 0)
+    } else
+        return numberStringLengthMap[it / 1000]!! + numberStringLengthMap[it]!!
+}

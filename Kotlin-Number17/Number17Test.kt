@@ -1,11 +1,11 @@
 package lee.eulerproject
 
 import lee.eulerproject.problem.getNumber17Answer
+import lee.eulerproject.problem.getNumberLength
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import kotlin.test.assertEquals
 
 
@@ -23,44 +23,50 @@ class Number17Test : Spek({
         }
     }
 
-    describe("특정 숫자까지의 영어 철자 갯수의 합을 구한다") {
+    describe("getNumberLength 잘 동작을 하는지") {
 
-        given("10이라는 숫자를 설정한다") {
-
-            val number = 10
-
-            on("10까지 영어 철자 갯수의 합은?") {
-
-                val value = getNumber17Answer(number)
-                it("39이다") {
-                    assertEquals(value, 39)
-                }
-            }
+        it("101의 길이는 6이다") {
+            assertEquals(getNumberLength(101), 16)
         }
 
-        given("99이라는 숫자가 있다") {
-
-            val number = 99
-
-            on("99까지 영어 철자 갯수의 합은?") {
-
-                val value = getNumber17Answer(number)
-                it("854이다") {
-                    assertEquals(value, 854)
-                }
-            }
+        it("145의 길이는 6이다") {
+            assertEquals(getNumberLength(145), 22)
         }
 
-        given("음수일 때") {
+        it("210의 길이는 6이다") {
+            assertEquals(getNumberLength(210), 16)
+        }
 
-            val number = -10
+        it("999의 길이는 6이다") {
+            assertEquals(getNumberLength(999), 24)
+        }
 
-            on("음수개 영어 철자 갯수의 합은?") {
-                val value = getNumber17Answer(number)
-                it("0과 일치 한다") {
-                    assertEquals(value, 0)
-                }
-            }
+        it("15의 길이는 6이다") {
+            assertEquals(getNumberLength(15), 7)
+        }
+
+        it("21의 길이는 6이다") {
+            assertEquals(getNumberLength(21), 9)
+        }
+
+        it("6의 길이는 6이다") {
+            assertEquals(getNumberLength(6), 3)
+        }
+
+        it("400의 길이는 6이다") {
+            assertEquals(getNumberLength(400), 11)
+        }
+
+        it("701의 길이는 6이다") {
+            assertEquals(getNumberLength(701), 18)
+        }
+
+        it("0의 길이는 0이다") {
+            assertEquals(getNumberLength(0), 0)
+        }
+
+        it("-2의 길이는 0이다") {
+            assertEquals(getNumberLength(-2), 0)
         }
     }
 })
