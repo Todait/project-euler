@@ -25,57 +25,66 @@ val array: Array<IntArray> = arrayOf(row1, row2, row3, row4, row5, row6, row7, r
 
 
 fun getNumber11Answer(): Int {
-    return listOf(getHorizontalMaxValue(), getVerticalMaxValue(), getTopRightToBottomLeftDiagonalMaxValue(), getTopLeftToBottomRightDiagonalMaxValue()).max() ?: 0
+    return listOf(getHorizontalMaxValue(), getVerticalMaxValue(), getTopRightToBottomLeftMaxValue(), getTopLeftToBottomRightMaxValue()).max() ?: 0
 }
 
-// for문이 더 깔끔한듯 합니다...ㅜㅜ
+// for문으로 짜는 것이 훨신 깔끔함
 fun getHorizontalMaxValue(): Int {
-
     var maxValue = 0
-    generateSequence(0) { i -> i + 1 }.takeWhile { i -> i < 17 }.forEach { i ->
-        generateSequence(0) { j -> j + 1 }.takeWhile { j -> j < 17 }.forEach { j ->
-            val multpleValue = array[i][j] * array[i][j + 1] * array[i][j + 2] * array[i][j + 3]
+    for (i in 0..16)
+        for (j in 0..16) {
+            val multpleValue = getMultple(array[i][j], array[i][j + 1], array[i][j + 2], array[i][j + 3])
             if (maxValue < multpleValue)
                 maxValue = multpleValue
         }
-    }
     return maxValue
 }
 
 
 fun getVerticalMaxValue(): Int {
     var maxValue = 0
-    generateSequence(0) { i -> i + 1 }.takeWhile { i -> i < 17 }.forEach { i ->
-        generateSequence(0) { j -> j + 1 }.takeWhile { j -> j < 17 }.forEach { j ->
-            val multpleValue = array[j][j] * array[j + 1][i] * array[j + 2][i] * array[j + 3][i]
+    for (i in 0..16)
+        for (j in 0..16) {
+            val multpleValue = getMultple(array[j][j], array[j + 1][i], array[j + 2][i], array[j + 3][i])
             if (maxValue < multpleValue)
                 maxValue = multpleValue
         }
-    }
     return maxValue
 }
 
-fun getTopRightToBottomLeftDiagonalMaxValue(): Int {
+fun getTopRightToBottomLeftMaxValue(): Int {
     var maxValue = 0
-    generateSequence(0) { i -> i + 1 }.takeWhile { i -> i < 17 }.forEach { i ->
-        generateSequence(3) { j -> j + 1 }.takeWhile { j -> j < 20 }.forEach { j ->
-            val multpleValue = array[i][j] * array[i + 1][j - 1] * array[i + 2][j - 2] * array[i + 3][j - 3]
+    for (i in 0..16)
+        for (j in 3..19) {
+            val multpleValue = getMultple(array[i][j], array[i + 1][j - 1], array[i + 2][j - 2], array[i + 3][j - 3])
             if (maxValue < multpleValue)
                 maxValue = multpleValue
         }
-    }
     return maxValue
 }
 
-fun getTopLeftToBottomRightDiagonalMaxValue(): Int {
+fun getTopLeftToBottomRightMaxValue(): Int {
 
     var maxValue = 0
-    generateSequence(0) { i -> i + 1 }.takeWhile { i -> i < 17 }.forEach { i ->
-        generateSequence(0) { j -> j + 1 }.takeWhile { j -> j < 17 }.forEach { j ->
-            val multpleValue = array[j][j] * array[j + 1][i + 1] * array[j + 2][i + 2] * array[j + 3][i + 3]
+    for (i in 0..16)
+        for (j in 0..16) {
+            val multpleValue = getMultple(array[j][j], array[j + 1][i + 1], array[j + 2][i + 2], array[j + 3][i + 3])
             if (maxValue < multpleValue)
                 maxValue = multpleValue
         }
-    }
     return maxValue
 }
+
+fun getMultple(a: Int, b: Int, c: Int, d: Int): Int =
+        if (a == 0 || b == 0 || c == 0 || d == 0)
+            0
+        else
+            a * b * c * d
+
+// Feedback
+// 함수명에 Diagonal 빼기 - 0
+// 각 함수별로 테스트 케이스 작성 - 0
+// 시퀸스 보다는 for문으로 -> 아님 깔끔하게 코드를 줄일 수 있는 방향으로 - 0
+
+
+
