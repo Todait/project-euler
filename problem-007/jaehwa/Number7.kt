@@ -1,10 +1,10 @@
 package lee.eulerproject.problem
 
 
-fun getPrimeNumber(number: Int): Int {
+fun getPrimeNumber(number: Int): Int? {
 
     if (number <= 0)
-        return 0
+        return null
     if (number == 1)
         return 2
     else {
@@ -20,18 +20,12 @@ fun getPrimeNumber(number: Int): Int {
     }
 }
 
-
 fun isPrimeNumberUsingForLoop(number: Int): Boolean {
+
     if (number <= 1)
         return false
-    else {
-        var judge = true
-        for (i in 2..Math.sqrt(number.toDouble()).toInt()) {
-            if (number % i == 0) {
-                judge = false
-                break
-            }
-        }
-        return judge
-    }
+    else
+        return (2..Math.sqrt(number.toDouble()).toInt()).all { number % it != 0 }
 }
+
+// 코드 컨밴션 -> 다 띄울꺼면 띄우고. 통일을 해라

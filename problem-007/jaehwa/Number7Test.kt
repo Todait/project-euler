@@ -19,7 +19,7 @@ class Number7Test : Spek({
     describe("getPrimeNumber가 제대로 동작하는지") {
 
         it("음수번쨰 소수는 0이다") {
-            assertEquals(getPrimeNumber(-1), 0)
+            assertEquals(getPrimeNumber(-1), null)
         }
 
         it("첫번째 소수는 2이다") {
