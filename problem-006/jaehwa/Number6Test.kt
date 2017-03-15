@@ -24,7 +24,7 @@ class Number6Test : Spek({
     describe("getSumOfSquare가 제대로 동작하는지") {
 
         it("-1까지 제곱의 합은 0이다") {
-            assertEquals(getSumOfSquare(-1), 0)
+            assertEquals(getSumOfSquare(-1), null)
         }
 
         it("1까지 제곱의 합은 1이다") {
@@ -51,7 +51,7 @@ class Number6Test : Spek({
     describe("getSquareOfSum 제대로 동작하는지") {
 
         it("-1까지 합의 제곱은 0이다") {
-            assertEquals(getSquareOfSum(-1), 0)
+            assertEquals(getSquareOfSum(-1), null)
         }
 
         it("1까지 합의 제곱은 1이다") {
