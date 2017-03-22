@@ -1,14 +1,39 @@
 package lee.eulerproject.problem
 
-fun getNumber4Answer(): Int {
-    var value = 0
-    generateSequence(100) { j -> j + 1 }
-            .takeWhile { j -> j < 1000 }
-            .forEach { j ->
-                generateSequence(10) { i -> i + 1 }
-                        .takeWhile { i -> i < 91 }
-                        .filter { i -> (j * (i * 11)).toString() == (j * (i * 11)).toString().reversed() && value < (j * (i * 11)) }
-                        .forEach { i -> value = (j * (i * 11)) }
-            }
-    return value
+import lee.eulerproject.common.pow
+
+fun getNumber4Answer(): Int = getMaxPalindrome(3)!!
+
+fun getMaxPalindrome(exponentiationNumber: Int): Int? {
+
+    if (exponentiationNumber <= 0)
+        return null
+
+    val maxNumber = 10.pow(exponentiationNumber) - 1
+    val minNumber = 10.pow(exponentiationNumber - 1)
+
+    for (i in maxNumber * 2 downTo minNumber * 2) {
+
+        var rightNumber = 0
+        var leftNumber = 0
+
+        if (i % 2 == 0) {
+            rightNumber = i / 2
+            leftNumber = i / 2
+        } else {
+            rightNumber = i / 2 + 1
+            leftNumber = i / 2
+        }
+
+        while (rightNumber <= maxNumber && leftNumber >= minNumber) {
+            val value = rightNumber * leftNumber
+            if (isPalindrome(value))
+                return value
+            rightNumber += 1
+            leftNumber -= 1
+        }
+    }
+    return null
 }
+
+fun isPalindrome(number: Int): Boolean = number.toString() == number.toString().reversed()
