@@ -10,14 +10,17 @@ import Foundation
 
 extension Int {
     
-    var 까지_제곱의_합: Int {
+    var square: Int {
+        return Int(pow(Double(self), Double(2)))
+    }
+    var sumOfSquare: Int {
         return self * (self + 1) * (2 * self + 1) / 6
     }
-    var 까지_합의_제곱: Int {
-        return Int(pow((Double(self * (self + 1) / 2)), Double(2)))
+    var squareOfSum: Int {
+        return (self * (self + 1) / 2).square
     }
-    var 까지_합의_제곱_과_제곱의_합_차이: Int {
-        return self.까지_합의_제곱 - self.까지_제곱의_합
+    var differenceBetweenSquareOfSumAndSumOfSquare: Int {
+        return abs(self.squareOfSum - self.sumOfSquare)
     }
     
 }
