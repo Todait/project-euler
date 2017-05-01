@@ -1,5 +1,5 @@
 import * as sols from '../solution';
-import * as euler from '../lib/euler';
+
 
 describe('각 자릿수를 나눴을때', () => {
     test('numberToArray', () => {
@@ -24,11 +24,7 @@ describe('제곱 합이 자기자신일때', () => {
         expect(sols.powerOfnSum(sols.numberToArray(9474), 4)).toEqual(9474);
     });
 
-    test('powOfDigits', () => {
-        expect(euler.powOfDigits(1634, 4)).toEqual(1634);
-        expect(euler.powOfDigits(8208, 4)).toEqual(8208);
-        expect(euler.powOfDigits(9474, 4)).toEqual(9474);
-    });
+    
 });
 
 describe('이제 5제곱으로 답을 찾자', () => {

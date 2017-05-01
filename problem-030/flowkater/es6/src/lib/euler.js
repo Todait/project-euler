@@ -1,3 +1,5 @@
+export const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
+
 export const powOfDigits = (n, e) => {
     let s = 0;
     while(n > 0){
@@ -6,5 +8,3 @@ export const powOfDigits = (n, e) => {
     }
     return s;
 };
-
-export const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
