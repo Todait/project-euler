@@ -11,27 +11,27 @@
 
 package main
 
+import "math"
+
 func main() {
 }
 
 func result() int64 {
-	var rst int64
-	var i int64
-	for i = 2; i <= 999999; i++ {
-		var bunhaeThing = bunhae(i)
+	var rst, i int64
 
-		if i == johap(bunhaeThing) {
+	for i = 2; i <= 999999; i++ {
+		if i == powEach(splitNumber(i), 5) {
 			rst += i
 		}
 	}
 	return rst
 }
 
-func sqaure5(num int64) int64 {
-	return num * num * num * num * num
+func pow(num int64, many int64) int64 {
+	return int64(math.Pow(float64(num), float64(many)))
 }
 
-func bunhae(num int64) []int64 {
+func splitNumber(num int64) []int64 {
 	var iNum = num
 	var arr []int64
 	var i int64
@@ -44,13 +44,10 @@ func bunhae(num int64) []int64 {
 	return arr
 }
 
-func johap(arr []int64) int64 {
-	var v int64
+func powEach(arr []int64, many int64) int64 {
 	var rst int64
 	for i := 0; i < len(arr); i++ {
-		// var p = int64(math.Pow10(i))
-		v = arr[i]
-		rst += sqaure5(v)
+		rst += pow(arr[i], many)
 	}
 
 	return rst

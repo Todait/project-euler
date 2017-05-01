@@ -12,29 +12,29 @@ func TestResult(t *testing.T) {
 	}
 }
 
-func TestSquare5(t *testing.T) {
+func TestPow(t *testing.T) {
 	var v int64
-	v = sqaure5(1)
+	v = pow(1, 5)
 	if v != 1 {
 		t.Error("v is not  1")
 	}
 
-	v = sqaure5(10)
+	v = pow(10, 5)
 	if v != 100000 {
 		t.Error("v is not  100000")
 	}
 }
 
-func TestBunhae(t *testing.T) {
+func TestSplitNumber(t *testing.T) {
 	var v []int64
 
-	v = bunhae(99)
+	v = splitNumber(99)
 
 	if len(v) != 2 {
 		t.Error("v len is not  2 ->", v)
 	}
 
-	v = bunhae(5165)
+	v = splitNumber(5165)
 
 	if len(v) != 4 {
 		t.Error("v len is not  4 ->", v)
@@ -45,7 +45,7 @@ func TestBunhae(t *testing.T) {
 		t.Error("v len is not  5,6,1,5 ->", v)
 	}
 
-	v = bunhae(51659999)
+	v = splitNumber(51659999)
 
 	if len(v) != 8 {
 		t.Error("v len is not  4 ->", v)
@@ -57,19 +57,19 @@ func TestBunhae(t *testing.T) {
 
 }
 
-func TestJohap(t *testing.T) {
+func TestPowEach(t *testing.T) {
 	var o []int64
 	var v int64
 
 	o = []int64{1, 2, 3, 4, 5}
-	v = johap(o)
+	v = powEach(o, 5)
 
 	if v != 4425 {
 		t.Error("v len is not  4425 ->", v)
 	}
 
 	o = []int64{9, 9, 9, 8, 8, 8}
-	v = johap(o)
+	v = powEach(o, 5)
 
 	if v != 275451 {
 		t.Error("v len is not  275451 ->", v)
