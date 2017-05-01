@@ -13,6 +13,9 @@ package main
 
 import "math"
 
+// Number 숫자 타입
+type Number int64
+
 func main() {
 }
 
@@ -50,5 +53,45 @@ func powEach(arr []int64, many int64) int64 {
 		rst += pow(arr[i], many)
 	}
 
+	return rst
+}
+
+func (num *Number) pow(many int64) Number {
+	return Number(math.Pow(float64(*num), float64(many)))
+}
+
+func (num *Number) splitNumber() []Number {
+	var iNum = *num
+	var arr []Number
+	var i Number
+
+	for i = iNum; i > 0; i /= 10 {
+		arr = append(arr, iNum%10)
+		iNum = iNum / 10
+	}
+
+	return arr
+}
+
+func (num *Number) powEach(many int64) Number {
+	var rst Number
+	var arr = num.splitNumber()
+
+	for i := 0; i < len(arr); i++ {
+		rst += arr[i].pow(many)
+	}
+
+	return rst
+
+}
+
+func resultByNumber() Number {
+	var rst, i Number
+
+	for i = 2; i <= 999999; i++ {
+		if i == i.powEach(5) {
+			rst += i
+		}
+	}
 	return rst
 }
