@@ -9,7 +9,7 @@
 import Foundation
 
 func sumOfCipherOfFiveSquare(to maxNumer: Int) -> Int {
-    guard maxNumer < 2 else {
+    guard maxNumer > 2 else {
         return 0
     }
     return (2...maxNumer).reduce(0) { sum, value in
