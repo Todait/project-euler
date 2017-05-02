@@ -23,7 +23,7 @@ class CipherSquareTests: QuickSpec {
                 expect(4150.cipherOfFiveSquare).to(equal(4150))
             }
         }
-        context("if num1 and num2 are relatively prime, it returns 1") {
+        context("") {
             it("") {
                 expect(sumOfCipherOfFiveSquare(to: 9 * 9 * 9 * 9 * 9 * 5)).to(equal(443839))
             }
