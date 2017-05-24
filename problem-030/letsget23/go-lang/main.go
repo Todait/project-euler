@@ -11,22 +11,43 @@
 
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 // Number 숫자 타입
 type Number int64
 
 func main() {
+	// rst1 := make(chan int64)
+	// rst2 := make(chan int64)
+
+	go result()
+	go result2()
 }
 
 func result() int64 {
 	var rst, i int64
 
-	for i = 2; i <= 999999; i++ {
+	for i = 2; i <= 236439; i += 2 {
 		if i == powEach(splitNumber(i), 5) {
 			rst += i
 		}
 	}
+	fmt.Println(rst)
+	return rst
+}
+
+func result2() int64 {
+	var rst, i int64
+
+	for i = 3; i <= 236439; i += 2 {
+		if i == powEach(splitNumber(i), 5) {
+			rst += i
+		}
+	}
+	fmt.Println(rst)
 	return rst
 }
 
@@ -55,6 +76,8 @@ func powEach(arr []int64, many int64) int64 {
 
 	return rst
 }
+
+//-------------------------------------------------------//
 
 func (num *Number) pow(many int64) Number {
 	return Number(math.Pow(float64(*num), float64(many)))
@@ -88,7 +111,7 @@ func (num *Number) powEach(many int64) Number {
 func resultByNumber() Number {
 	var rst, i Number
 
-	for i = 2; i <= 999999; i++ {
+	for i = 2; i <= 236439; i++ {
 		if i == i.powEach(5) {
 			rst += i
 		}
